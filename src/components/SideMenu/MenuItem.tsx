@@ -1,5 +1,6 @@
 // import { observe } from 'mobx';
-import { observer } from 'mobx-react';
+import { makeObservable } from 'mobx';
+import { observer } from "mobx-react"
 import * as React from 'react';
 
 import { ShelfIcon } from '../../common-elements/shelfs';
@@ -16,6 +17,10 @@ export interface MenuItemProps {
 
 @observer
 export class MenuItem extends React.Component<MenuItemProps> {
+  constructor(props) {
+    super(props);
+    makeObservable(this);
+  }
   ref = React.createRef<HTMLLabelElement>();
 
   activate = (evt: React.MouseEvent<HTMLElement>) => {
@@ -50,7 +55,7 @@ export class MenuItem extends React.Component<MenuItemProps> {
               {this.props.children}
             </MenuItemTitle>
             {(item.depth > 0 && item.items.length > 0 && (
-                <ShelfIcon float={'right'} direction={item.expanded ? 'down' : 'right'} />
+              <ShelfIcon float={'right'} direction={item.expanded ? 'down' : 'right'} />
             )) ||
               null}
           </MenuItemLabel>
@@ -73,6 +78,10 @@ export interface OperationMenuItemContentProps {
 
 @observer
 export class OperationMenuItemContent extends React.Component<OperationMenuItemContentProps> {
+  constructor(props) {
+    super(props);
+    makeObservable(this);
+  }
   ref = React.createRef<HTMLLabelElement>();
 
   componentDidUpdate() {

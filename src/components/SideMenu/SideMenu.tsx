@@ -1,4 +1,4 @@
-import { observer } from 'mobx-react';
+import { observer } from "mobx-react"
 import * as React from 'react';
 
 import { IMenuItem, MenuStore } from '../../services/MenuStore';
@@ -7,11 +7,16 @@ import { MenuItems } from './MenuItems';
 
 import { PerfectScrollbarWrap } from '../../common-elements/perfect-scrollbar';
 import { RedocAttribution } from './styled.elements';
+import { makeObservable } from 'mobx';
 
 @observer
 export class SideMenu extends React.Component<{ menu: MenuStore; className?: string }> {
   static contextType = OptionsContext;
   private _updateScroll?: () => void;
+  constructor(props) {
+    super(props);
+    makeObservable(this);
+  }
 
   render() {
     const store = this.props.menu;

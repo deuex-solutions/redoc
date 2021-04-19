@@ -1,4 +1,4 @@
-import { observer } from 'mobx-react';
+import { observer } from "mobx-react"
 import * as React from 'react';
 import { isPayloadSample, OperationModel, RedocNormalizedOptions } from '../../services';
 import { PayloadSamples } from '../PayloadSamples/PayloadSamples';
@@ -6,6 +6,7 @@ import { SourceCodeWithCopy } from '../SourceCode/SourceCode';
 
 import { RightPanelHeader, Tab, TabList, TabPanel, Tabs } from '../../common-elements';
 import { OptionsContext } from '../OptionsProvider';
+import { makeObservable } from 'mobx';
 
 export interface RequestSamplesProps {
   operation: OperationModel;
@@ -16,6 +17,11 @@ export class RequestSamples extends React.Component<RequestSamplesProps> {
   static contextType = OptionsContext;
   context: RedocNormalizedOptions;
   operation: OperationModel;
+
+  constructor(props) {
+    super(props);
+    makeObservable(this);
+  }
 
   render() {
     const { operation } = this.props;

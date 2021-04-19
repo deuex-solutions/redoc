@@ -1,10 +1,11 @@
-import { observer } from 'mobx-react';
+import { observer } from "mobx-react"
 import * as React from 'react';
 
 import { OperationModel } from '../../services/models';
 
 import { RightPanelHeader, Tab, TabList, TabPanel, Tabs } from '../../common-elements';
 import { PayloadSamples } from '../PayloadSamples/PayloadSamples';
+import { makeObservable } from 'mobx';
 
 export interface ResponseSamplesProps {
   operation: OperationModel;
@@ -13,6 +14,10 @@ export interface ResponseSamplesProps {
 @observer
 export class ResponseSamples extends React.Component<ResponseSamplesProps> {
   operation: OperationModel;
+  constructor(props) {
+    super(props);
+    makeObservable(this);
+  }
 
   render() {
     const { operation } = this.props;

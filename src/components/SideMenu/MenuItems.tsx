@@ -1,4 +1,5 @@
-import { observer } from 'mobx-react';
+import { makeObservable } from 'mobx';
+import { observer } from "mobx-react"
 import * as React from 'react';
 
 import { IMenuItem } from '../../services';
@@ -18,6 +19,10 @@ export interface MenuItemsProps {
 
 @observer
 export class MenuItems extends React.Component<MenuItemsProps> {
+  constructor(props) {
+    super(props);
+    makeObservable(this);
+  }
   render() {
     const { items, root, className } = this.props;
     const expanded = this.props.expanded == null ? true : this.props.expanded;

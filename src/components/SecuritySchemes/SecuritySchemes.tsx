@@ -1,4 +1,5 @@
-import { observer } from 'mobx-react';
+import { makeObservable } from 'mobx';
+import { observer } from "mobx-react"
 import * as React from 'react';
 import { TokenGroup } from '..';
 
@@ -75,7 +76,10 @@ export interface SecurityDefsState {
 
 @observer
 export class SecurityDefs extends React.PureComponent<SecurityDefsProps, SecurityDefsState> {
-
+  constructor(props) {
+    super(props);
+    makeObservable(this);
+  }
   state = {
     tokens: {},
   };
@@ -90,7 +94,7 @@ export class SecurityDefs extends React.PureComponent<SecurityDefsProps, Securit
     return token => {
       const tokens = this.state.tokens;
       tokens[id] = token;
-      this.setState({tokens});
+      this.setState({ tokens });
     };
   };
 

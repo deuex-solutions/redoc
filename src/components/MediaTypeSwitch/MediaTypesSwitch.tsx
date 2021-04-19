@@ -1,4 +1,5 @@
-import { observer } from 'mobx-react';
+import { makeObservable } from 'mobx';
+import { observer } from "mobx-react"
 import * as React from 'react';
 
 import { DropdownProps } from '../../common-elements/dropdown';
@@ -20,6 +21,10 @@ export interface MediaTypesSwitchProps {
 
 @observer
 export class MediaTypesSwitch extends React.Component<MediaTypesSwitchProps> {
+  constructor(props) {
+    super(props);
+    makeObservable(this);
+  }
   switchMedia = ({ value }) => {
     if (this.props.content) {
       this.props.content.activate(parseInt(value, 10));

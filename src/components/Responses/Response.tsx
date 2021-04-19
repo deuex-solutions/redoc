@@ -1,4 +1,5 @@
-import { observer } from 'mobx-react';
+import { makeObservable } from 'mobx';
+import { observer } from "mobx-react"
 import * as React from 'react';
 
 import { ResponseModel } from '../../services/models';
@@ -7,6 +8,10 @@ import { ResponseDetailsWrap, StyledResponseTitle } from './styled.elements';
 
 @observer
 export class ResponseView extends React.Component<{ response: ResponseModel }> {
+  constructor(props) {
+    super(props);
+    makeObservable(this);
+  }
   toggle = () => {
     this.props.response.toggle();
   };

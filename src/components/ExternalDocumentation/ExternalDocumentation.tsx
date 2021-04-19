@@ -1,4 +1,5 @@
-import { observer } from 'mobx-react';
+import { makeObservable } from 'mobx';
+import { observer } from "mobx-react"
 import * as React from 'react';
 import styled from '../../styled-components';
 import { OpenAPIExternalDocumentation } from '../../types';
@@ -14,6 +15,10 @@ export class ExternalDocumentation extends React.Component<{
   externalDocs: OpenAPIExternalDocumentation;
   compact?: boolean;
 }> {
+  constructor(props) {
+    super(props);
+    makeObservable(this);
+  }
   render() {
     const { externalDocs } = this.props;
     if (!externalDocs || !externalDocs.url) {

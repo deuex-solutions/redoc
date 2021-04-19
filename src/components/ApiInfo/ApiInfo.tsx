@@ -1,4 +1,4 @@
-import { observer } from 'mobx-react';
+import { observer } from "mobx-react"
 import * as React from 'react';
 
 import { AppStore } from '../../services/AppStore';
@@ -14,6 +14,7 @@ import {
   InfoSpanBox,
   InfoSpanBoxWrap,
 } from './styled.elements';
+import { makeObservable } from 'mobx';
 
 export interface ApiInfoProps {
   store: AppStore;
@@ -21,6 +22,11 @@ export interface ApiInfoProps {
 
 @observer
 export class ApiInfo extends React.Component<ApiInfoProps> {
+  constructor(props) {
+    super(props);
+    makeObservable(this);
+  }
+
   handleDownloadClick = e => {
     if (!e.target.href) {
       e.target.href = this.props.store.spec.info.downloadLink;

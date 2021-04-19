@@ -1,4 +1,5 @@
-import { observer } from 'mobx-react';
+import { makeObservable } from 'mobx';
+import { observer } from "mobx-react"
 import * as React from 'react';
 import { SubmitButton } from '../../common-elements/buttons';
 import { FlexLayoutReverse } from '../../common-elements/panels';
@@ -24,8 +25,8 @@ export interface ConsoleViewerState {
 export interface Schema {
   _$ref?: any;
 }
-
 @observer
+
 export class ConsoleViewer extends React.Component<ConsoleViewerProps, ConsoleViewerState> {
   operation: OperationModel;
   additionalHeaders: object;
@@ -34,13 +35,14 @@ export class ConsoleViewer extends React.Component<ConsoleViewerProps, ConsoleVi
 
   constructor(props) {
     super(props);
+    makeObservable(this)
     this.state = {
       result: null,
     };
   }
   onClickSend = async () => {
     const ace = this.consoleEditor && this.consoleEditor.editor;
-    const { operation, securitySchemes: {schemes}, additionalHeaders = {}, urlIndex = 0 } = this.props;
+    const { operation, securitySchemes: { schemes }, additionalHeaders = {}, urlIndex = 0 } = this.props;
 
     let value = ace && ace.editor.getValue();
 
@@ -63,7 +65,7 @@ export class ConsoleViewer extends React.Component<ConsoleViewerProps, ConsoleVi
 
     const securityHeaders: Dict<string | undefined> = {};
 
-    operation.security.forEach(({schemes: [{ id }]}) => {
+    operation.security.forEach(({ schemes: [{ id }] }) => {
       if (schemeMapper.has(id)) {
         // this part of code needs a ts-ignore because typescript couldn't detect that schemeMapper.get(id) -
         // has been checked to avoid token of undefined.

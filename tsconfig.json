@@ -4,6 +4,7 @@
     "moduleResolution": "node",
     "target": "es5",
     "noImplicitAny": false,
+    "useDefineForClassFields": true,
     "noUnusedParameters": true,
     "noUnusedLocals": true,
     "strictNullChecks": true,

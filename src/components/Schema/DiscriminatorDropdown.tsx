@@ -1,4 +1,5 @@
-import { observer } from 'mobx-react';
+import { makeObservable } from 'mobx';
+import { observer } from "mobx-react"
 import * as React from 'react';
 
 import { DropdownOption, StyledDropdown } from '../../common-elements/dropdown';
@@ -9,6 +10,10 @@ export class DiscriminatorDropdown extends React.Component<{
   parent: SchemaModel;
   enumValues: string[];
 }> {
+  constructor(props) {
+    super(props);
+    makeObservable(this);
+  }
   sortOptions(options: DropdownOption[], enumValues: string[]): void {
     if (enumValues.length === 0) {
       return;

@@ -1,10 +1,15 @@
-import { observer } from 'mobx-react';
+import { makeObservable } from 'mobx';
+import { observer } from "mobx-react"
 import * as React from 'react';
 import { OpenAPIInfo } from '../../types';
 import { LinkWrap, LogoImgEl, LogoWrap } from './styled.elements';
 
 @observer
 export class ApiLogo extends React.Component<{ info: OpenAPIInfo }> {
+  constructor(props) {
+    super(props);
+    makeObservable(this);
+  }
   render() {
     const { info } = this.props;
     const logoInfo = info['x-logo'];

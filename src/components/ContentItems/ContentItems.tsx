@@ -1,4 +1,4 @@
-import { observer } from 'mobx-react';
+import { observer } from "mobx-react"
 import * as React from 'react';
 import { AppStore } from '../../services';
 
@@ -9,6 +9,7 @@ import { H1, H2, MiddlePanel, Row, Section, ShareLink } from '../../common-eleme
 import { ContentItemModel } from '../../services/MenuBuilder';
 import { GroupModel } from '../../services/models';
 import { Operation } from '../Operation/Operation';
+import { makeObservable } from 'mobx';
 
 export interface ContentItemsProps {
   items: ContentItemModel[];
@@ -17,6 +18,10 @@ export interface ContentItemsProps {
 
 @observer
 export class ContentItems extends React.Component<ContentItemsProps> {
+  constructor(props) {
+    super(props);
+    makeObservable(this);
+  }
   render() {
     const { items, store } = this.props;
     if (items.length === 0) {
@@ -33,6 +38,10 @@ export interface ContentItemProps {
 
 @observer
 export class ContentItem extends React.Component<ContentItemProps> {
+  constructor(props) {
+    super(props);
+    makeObservable(this);
+  }
   render() {
     const { item, store } = this.props;
     let content;
@@ -69,6 +78,10 @@ const middlePanelWrap = component => <MiddlePanel compact={true}>{component}</Mi
 
 @observer
 export class SectionItem extends React.Component<ContentItemProps> {
+  constructor(props) {
+    super(props);
+    makeObservable(this);
+  }
   render() {
     const { name, description, externalDocs, level } = this.props.item as GroupModel;
 

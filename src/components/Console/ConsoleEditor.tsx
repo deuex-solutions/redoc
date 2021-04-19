@@ -1,4 +1,4 @@
-import { observer } from 'mobx-react';
+import { observer } from "mobx-react"
 import * as React from 'react';
 
 import AceEditor from 'react-ace';
@@ -8,16 +8,21 @@ import 'brace/mode/json';
 import 'brace/theme/github';
 import 'brace/theme/monokai';
 
-import {MediaTypeModel} from '../../services/models';
-import {ConsoleEditorWrapper} from './ConsoleEditorWrapper';
+import { MediaTypeModel } from '../../services/models';
+import { ConsoleEditorWrapper } from './ConsoleEditorWrapper';
+import { makeObservable } from 'mobx';
 
 export interface ConsoleEditorProps {
   mediaTypes: MediaTypeModel[];
 }
 
 @observer
-export class ConsoleEditor extends React.Component<ConsoleEditorProps> {
 
+export class ConsoleEditor extends React.Component<ConsoleEditorProps> {
+  constructor(props) {
+    super(props);
+    makeObservable(this);
+  }
   editor: any;
 
   render() {

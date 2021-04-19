@@ -1,4 +1,4 @@
-import { Lambda, observe } from 'mobx';
+import { Lambda, makeAutoObservable, observe } from 'mobx';
 
 import { OpenAPISpec } from '../types';
 import { loadAndBundleSpec } from '../utils/loadAndBundleSpec';
@@ -71,6 +71,7 @@ export class AppStore {
     options: RedocRawOptions = {},
     createSearchIndex: boolean = true,
   ) {
+    makeAutoObservable(this)
     this.rawOptions = options;
     this.options = new RedocNormalizedOptions(options, DEFAULT_OPTIONS);
     this.scroll = new ScrollService(this.options);

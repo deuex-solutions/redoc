@@ -1,4 +1,4 @@
-import { observer } from 'mobx-react';
+import { observer } from "mobx-react"
 import * as React from 'react';
 
 import { ClickablePropertyNameCell, RequiredLabel } from '../../common-elements/fields';
@@ -17,6 +17,7 @@ import { ShelfIcon, TextField } from '../../common-elements/';
 
 import { FieldModel } from '../../services/models';
 import { Schema, SchemaOptions } from '../Schema/Schema';
+import { makeObservable } from 'mobx';
 
 export interface FieldProps extends SchemaOptions {
   className?: string;
@@ -30,6 +31,10 @@ export interface FieldProps extends SchemaOptions {
 
 @observer
 export class Field extends React.Component<FieldProps> {
+  constructor(props) {
+    super(props);
+    makeObservable(this);
+  }
   toggle = () => {
     this.props.field.toggle();
   };
@@ -59,12 +64,12 @@ export class Field extends React.Component<FieldProps> {
         {required && <RequiredLabel> required </RequiredLabel>}
       </ClickablePropertyNameCell>
     ) : (
-        <PropertyNameCell className={deprecated ? 'deprecated' : undefined} kind={kind} title={name}>
-          <PropertyBullet />
-          {name}
-          {required && <RequiredLabel> required </RequiredLabel>}
-        </PropertyNameCell>
-      );
+      <PropertyNameCell className={deprecated ? 'deprecated' : undefined} kind={kind} title={name}>
+        <PropertyBullet />
+        {name}
+        {required && <RequiredLabel> required </RequiredLabel>}
+      </PropertyNameCell>
+    );
 
     return (
       <>

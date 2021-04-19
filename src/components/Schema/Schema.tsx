@@ -1,4 +1,4 @@
-import { observer } from 'mobx-react';
+import { observer } from "mobx-react"
 import * as React from 'react';
 
 import { RecursiveLabel, TypeName, TypeTitle } from '../../common-elements/fields';
@@ -11,6 +11,7 @@ import { ObjectSchema } from './ObjectSchema';
 import { OneOfSchema } from './OneOfSchema';
 
 import { l } from '../../services/Labels';
+import { makeObservable } from 'mobx';
 
 export interface SchemaOptions {
   showTitle?: boolean;
@@ -24,6 +25,10 @@ export interface SchemaProps extends SchemaOptions {
 
 @observer
 export class Schema extends React.Component<Partial<SchemaProps>> {
+  constructor(props) {
+    super(props);
+    makeObservable(this);
+  }
   render() {
     const { schema } = this.props;
     if (!schema) {

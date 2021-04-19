@@ -1,4 +1,5 @@
-import { observer } from 'mobx-react';
+import { makeObservable } from 'mobx';
+import { observer } from "mobx-react"
 import * as React from 'react';
 
 import { MenuStore } from '../../services/MenuStore';
@@ -82,9 +83,13 @@ const FloatingButton = styled.div`
 
 @observer
 export class StickyResponsiveSidebar extends React.Component<
-  StickySidebarProps,
-  StickySidebarState
+StickySidebarProps,
+StickySidebarState
 > {
+  constructor(props) {
+    super(props);
+    makeObservable(this);
+  }
   static contextType = OptionsContext;
   context!: React.ContextType<typeof OptionsContext>;
   state: StickySidebarState = { offsetTop: '0px' };

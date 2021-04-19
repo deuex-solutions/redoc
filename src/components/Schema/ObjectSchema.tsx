@@ -1,4 +1,4 @@
-import { observer } from 'mobx-react';
+import { observer } from "mobx-react"
 import * as React from 'react';
 
 import { SchemaModel } from '../../services/models';
@@ -9,6 +9,7 @@ import { DiscriminatorDropdown } from './DiscriminatorDropdown';
 import { SchemaProps } from './Schema';
 
 import { mapWithLast } from '../../utils';
+import { makeObservable } from 'mobx';
 
 export interface ObjectSchemaProps extends SchemaProps {
   discriminator?: {
@@ -19,6 +20,10 @@ export interface ObjectSchemaProps extends SchemaProps {
 
 @observer
 export class ObjectSchema extends React.Component<ObjectSchemaProps> {
+  constructor(props) {
+    super(props);
+    makeObservable(this);
+  }
   get parentSchema() {
     return this.props.discriminator!.parentSchema;
   }
@@ -34,11 +39,11 @@ export class ObjectSchema extends React.Component<ObjectSchemaProps> {
 
     const filteredFields = needFilter
       ? fields.filter(item => {
-          return !(
-            (this.props.skipReadOnly && item.schema.readOnly) ||
-            (this.props.skipWriteOnly && item.schema.writeOnly)
-          );
-        })
+        return !(
+          (this.props.skipReadOnly && item.schema.readOnly) ||
+          (this.props.skipWriteOnly && item.schema.writeOnly)
+        );
+      })
       : fields;
 
     return (

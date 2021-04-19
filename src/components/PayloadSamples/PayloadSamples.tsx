@@ -1,4 +1,4 @@
-import { observer } from 'mobx-react';
+import { observer } from "mobx-react"
 import * as React from 'react';
 import { MediaTypeSamples } from './MediaTypeSamples';
 
@@ -6,6 +6,7 @@ import { MediaContentModel } from '../../services/models';
 import { DropdownOrLabel } from '../DropdownOrLabel/DropdownOrLabel';
 import { MediaTypesSwitch } from '../MediaTypeSwitch/MediaTypesSwitch';
 import { InvertedSimpleDropdown, MimeLabel } from './styled.elements';
+import { makeObservable } from 'mobx';
 
 export interface PayloadSamplesProps {
   content: MediaContentModel;
@@ -13,6 +14,10 @@ export interface PayloadSamplesProps {
 
 @observer
 export class PayloadSamples extends React.Component<PayloadSamplesProps> {
+  constructor(props) {
+    super(props);
+    makeObservable(this);
+  }
   render() {
     const mimeContent = this.props.content;
     if (mimeContent === undefined) {

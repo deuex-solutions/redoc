@@ -1,4 +1,4 @@
-import { observer } from 'mobx-react';
+import { observer } from "mobx-react"
 import * as React from 'react';
 
 import { Badge, DarkRightPanel, H2, MiddlePanel, Row } from '../../common-elements';
@@ -13,13 +13,14 @@ import { ExternalDocumentation } from '../ExternalDocumentation/ExternalDocument
 import { Extensions } from '../Fields/Extensions';
 import { Markdown } from '../Markdown/Markdown';
 
-import {SwitchBox} from '../../common-elements/SwitchBox';
-import {OptionsContext } from '../OptionsProvider';
-import {Parameters } from '../Parameters/Parameters';
-import {RequestSamples } from '../RequestSamples/RequestSamples';
-import {ResponsesList } from '../Responses/ResponsesList';
-import {ResponseSamples } from '../ResponseSamples/ResponseSamples';
-import {SecurityRequirements } from '../SecurityRequirement/SecurityRequirement';
+import { SwitchBox } from '../../common-elements/SwitchBox';
+import { OptionsContext } from '../OptionsProvider';
+import { Parameters } from '../Parameters/Parameters';
+import { RequestSamples } from '../RequestSamples/RequestSamples';
+import { ResponsesList } from '../Responses/ResponsesList';
+import { ResponseSamples } from '../ResponseSamples/ResponseSamples';
+import { SecurityRequirements } from '../SecurityRequirement/SecurityRequirement';
+import { makeObservable } from 'mobx';
 
 const OperationRow = styled(Row)`
   backface-visibility: hidden;
@@ -47,6 +48,7 @@ export class Operation extends React.Component<OperationProps, OperationState> {
 
   constructor(props) {
     super(props);
+    makeObservable(this);
     this.state = {
       executeMode: false,
       urlIndex: 0,
@@ -82,7 +84,7 @@ export class Operation extends React.Component<OperationProps, OperationState> {
                   label="Try it out!"
                 />
               }
-              {options.pathInMiddlePanel && <Endpoint operation={operation} inverted={true} handleUrl={this.onUrlChanged}/>}
+              {options.pathInMiddlePanel && <Endpoint operation={operation} inverted={true} handleUrl={this.onUrlChanged} />}
               {hasDescription && (
                 <Description>
                   {description !== undefined && <Markdown source={description} />}
@@ -95,7 +97,7 @@ export class Operation extends React.Component<OperationProps, OperationState> {
               <ResponsesList responses={operation.responses} />
             </MiddlePanel>
             <DarkRightPanel>
-              {!options.pathInMiddlePanel && <Endpoint operation={operation} handleUrl={this.onUrlChanged}/>}
+              {!options.pathInMiddlePanel && <Endpoint operation={operation} handleUrl={this.onUrlChanged} />}
               {executeMode &&
                 <div>
                   <ConsoleViewer
@@ -120,7 +122,7 @@ export class Operation extends React.Component<OperationProps, OperationState> {
       </OptionsContext.Consumer>
     );
   }
-  onUrlChanged = (index= 0) => {
+  onUrlChanged = (index = 0) => {
     this.setState({
       urlIndex: index,
     });

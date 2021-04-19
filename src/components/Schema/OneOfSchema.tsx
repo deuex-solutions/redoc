@@ -1,4 +1,5 @@
-import { observer } from 'mobx-react';
+import { makeObservable } from 'mobx';
+import { observer } from "mobx-react"
 import * as React from 'react';
 
 import {
@@ -17,6 +18,10 @@ export interface OneOfButtonProps {
 
 @observer
 export class OneOfButton extends React.Component<OneOfButtonProps> {
+  constructor(props) {
+    super(props);
+    makeObservable(this);
+  }
   render() {
     const { idx, schema, subSchema } = this.props;
     return (
@@ -33,6 +38,10 @@ export class OneOfButton extends React.Component<OneOfButtonProps> {
 
 @observer
 export class OneOfSchema extends React.Component<SchemaProps> {
+  constructor(props) {
+    super(props);
+    makeObservable(this);
+  }
   render() {
     const {
       schema: { oneOf },
